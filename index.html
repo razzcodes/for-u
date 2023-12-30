@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <link rel="stylesheet" href="css/style.css" />
+    <style>
+      .header_text {
+        opacity: 1;
+        transition: opacity 0.5s ease-in-out;
+      }
+
+      .container.fade-out .header_text {
+        opacity: 0;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div>
+        <h1 class="header_text" id="headerText">
+          Do you wanna go out with me?
+        </h1>
+      </div>
+      <div class="gif_container">
+        <img
+          src="https://media1.giphy.com/media/v1.Y2lkPTc5MGI3NjExcDdtZ2JiZDR0a3lvMWF4OG8yc3p6Ymdvd3g2d245amdveDhyYmx6eCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9cw/cLS1cfxvGOPVpf9g3y/giphy.gif"
+          alt="Cute animated illustration"
+        />
+      </div>
+      <div class="buttons">
+        <button class="btn" id="yesButton" onclick="nextPage()">Yes</button>
+        <button
+          class="btn"
+          id="noButton"
+          onmouseover="moveButton()"
+          onclick="moveButton()"
+        >
+          No
+        </button>
+        <script>
+          function nextPage() {
+            window.location.href = "yay.html";
+          }
+
+          function moveButton() {
+            var x =
+              Math.random() *
+                (window.innerWidth -
+                  document.getElementById("noButton").offsetWidth) -
+              85;
+            var y =
+              Math.random() *
+                (window.innerHeight -
+                  document.getElementById("noButton").offsetHeight) -
+              48;
+            document.getElementById("noButton").style.left = `${x}px`;
+            document.getElementById("noButton").style.top = `${y}px`;
+          }
+          var headerText = document.getElementById("headerText");
+          var container = document.querySelector(".container");
+
+          // An array of texts to cycle through
+          var texts = [
+            "Do you wanna go out with me?",
+            "Mau keluar bareng aku gak?",
+            "Pleasee",
+          ];
+          var textIndex = 0;
+
+          // Change text every 3 seconds
+          setInterval(function () {
+            // Add the class to trigger the fade-out animation
+            container.classList.add("fade-out");
+
+            // After a short delay, change the text and remove the fade-out class to trigger the fade-in animation
+            setTimeout(function () {
+              headerText.textContent = texts[textIndex];
+              container.classList.remove("fade-out");
+            }, 500); // 500ms should match the transition duration
+
+            // Move to the next text in the array
+            textIndex = (textIndex + 1) % texts.length;
+          }, 3000); // Change text every 3 seconds
+        </script>
+      </div>
+    </div>
+  </body>
+</html>
